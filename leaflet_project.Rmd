@@ -1,0 +1,32 @@
+---
+title: "Paris Map"
+author: "Milca Tarshish"
+date: "6/28/2019"
+output: html_document
+---
+
+```{r setup, warning=F, echo=F}
+library(leaflet)
+EifelIcon<-makeIcon(
+        iconUrl = "https://img.icons8.com/ios/50/000000/eiffel-tower.png",
+        iconWidth = 31*215/230, iconHeight = 31,iconAnchorX = 31*215/230/2,iconAnchorY = 16)
+#Paris_sites<-c(
+#        "<a href=`https://www.toureiffel.paris/en`>Eifel Tower</a>",
+#        "<a href=`https://www.notredamedeparis.fr/en/`>Notre Dam Cathedral</a>",
+#        "<a href=`https://www.louvre.fr/en`>Louvre Musem</a>",
+#        "<a href=`http://www.paris-arc-de-triomphe.fr/en/`>Arc De Triumph</a>"
+#)
+
+paris_df<-data.frame(
+                     lat=c(48.858093,48.852966,48.860294,48.873756),
+                     lng=c(2.294694,2.349902,2.338629,2.294946))
+paris_sites_names=c("Eifel Tower","Notre Dam Cathedral","Louvre Museum","arc de triomphe")
+paris_df %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(icon=EifelIcon) %>%
+        addCircleMarkers(color=c("blue","red","orange","green")) %>%
+        addLegend(labels=paris_sites_names,colors=c("blue","red","orange","green"))
+
+                     
+```
